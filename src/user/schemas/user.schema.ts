@@ -15,6 +15,8 @@ export class User extends Document{
     status:string;
     @Prop()
     password: string;
+    @Prop()
+    drivingSchool: string;
     @Prop({
         type:{
             subjectOne:{

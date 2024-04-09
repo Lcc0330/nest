@@ -22,23 +22,20 @@ export class UserService {
         .find(param)
         .sort({ updatedAt: -1 })
         .exec()
-      if (!result || Object.keys(result).length === 0) {
-        return '未查询到数据'
-      }
+      
+      console.log(result,'findOne result')
       return result
     } catch (error) {
-      console.log(error)
+      console.log(error,'findOne')
       throw error
     }
   }
 
   async create (createItemDto: any) {
     try {
+      
       const createItem = new this.userModel(createItemDto)
       const result = await createItem.save()
-      if (!result || Object.keys(result).length === 0) {
-        return '新增失败'
-      }
       return result
     } catch (error) {
       console.log(error)
@@ -48,9 +45,7 @@ export class UserService {
   async delete (id: any) {
     try {
       const result = await this.userModel.findOneAndDelete(id).exec()
-      if (!result || Object.keys(result).length === 0) {
-        return 'user not found'
-      }
+      
       return result
     } catch (error) {
       console.log(error)
@@ -63,9 +58,7 @@ export class UserService {
       const result = await this.userModel
         .findOneAndUpdate({ ID: id }, updateItemDto, { new: true })
         .exec()
-      if (!result || Object.keys(result).length === 0) {
-        return '更新失败'
-      }
+      
       return result
     } catch (error) {
       console.log(error)
